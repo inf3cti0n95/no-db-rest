@@ -18,5 +18,9 @@
   "bugs": {
     "url": "https://github.com/inf3cti0n95/no-db-rest/issues"
   },
-  "homepage": "https://github.com/inf3cti0n95/no-db-rest#readme"
+  "homepage": "https://github.com/inf3cti0n95/no-db-rest#readme",
+  "devDependencies": {
+    "@types/node": "^7.0.23",
+    "typescript": "^2.3.4"
+  }
 }
