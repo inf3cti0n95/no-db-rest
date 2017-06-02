@@ -1,0 +1,22 @@
+{
+  "name": "no-db-rest",
+  "version": "0.0.1",
+  "description": "Create a REST API with Storing Data in File i.e. No DB",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/inf3cti0n95/no-db-rest.git"
+  },
+  "keywords": [
+    "REST"
+  ],
+  "author": "Viraj Trivedi <inf3cti0n95@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/inf3cti0n95/no-db-rest/issues"
+  },
+  "homepage": "https://github.com/inf3cti0n95/no-db-rest#readme"
+}
