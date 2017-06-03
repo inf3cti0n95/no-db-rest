@@ -9,12 +9,12 @@ export default class NoDBFileOps {
         if(typeof filepath !== "undefined")
             this.filepath = filepath;
         else
-            throw new Error("FilePath Undefined")
+            throw new Error("FilePath Undefined");
         let data;
         try {
             data = readFileSync(this.filepath);
         } catch (error) {
-            openSync(this.filepath,"w+")
+            openSync(this.filepath,"w+");
             writeFileSync(this.filepath,"[]");
             data = readFileSync(this.filepath);
         }

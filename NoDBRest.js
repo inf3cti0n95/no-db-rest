@@ -24,9 +24,15 @@ function NoDBRest(filepath) {
 exports.NoDBRest = NoDBRest;
 function getRequest(fileOps, request, response) {
     response.send(JSON.stringify(fileOps.get(request.query)));
+    console.log("Data Fetched from " + fileOps.filepath + " and served response");
 }
 function postRequest(fileOps, request, response) {
-    response.send(JSON.stringify(fileOps.put(request.query)));
+    var resp = fileOps.put(request.query);
+    if (resp)
+        console.log("Data inserted to " + fileOps.filepath + " and served response");
+    else
+        console.log("Data not inserted to " + fileOps.filepath);
+    response.send(JSON.stringify(resp));
 }
 function putRequest(fileOps, request, response) {
     var query = request.query.search;
@@ -49,8 +55,12 @@ function putRequest(fileOps, request, response) {
             val = eval(val);
         updateObject[key] = val;
     });
-    response.send(JSON.stringify(fileOps.update(queryObject, updateObject)));
+    var resp = fileOps.update(queryObject, updateObject);
+    response.send(JSON.stringify(resp));
+    console.log("Data updated at " + resp + " places in " + fileOps.filepath + " and served response");
 }
 function deleteRequest(fileOps, request, response) {
-    response.send(JSON.stringify(fileOps.delete(request.query)));
+    var resp = fileOps.delete(request.query);
+    response.send(JSON.stringify(resp));
+    console.log("Data deleted at " + resp + " places in " + fileOps.filepath + " and served response");
 }
