@@ -1,9 +1,9 @@
-import { readFileSync, writeFileSync, appendFileSync } from 'fs'
+import { readFileSync, writeFileSync, appendFileSync, openSync } from 'fs'
 import { sync } from 'mkdirp'
 
-export default class NoDBRest {
+export default class NoDBFileOps {
     public filepath:string;
-    private JSONDataArray: Array<Object>;
+    private JSONDataArray: Array<any>;
     constructor(filepath: string){
 
         if(typeof filepath !== "undefined")
@@ -14,7 +14,9 @@ export default class NoDBRest {
         try {
             data = readFileSync(this.filepath);
         } catch (error) {
-            console.error(error)
+            openSync(this.filepath,"w+")
+            writeFileSync(this.filepath,"[]");
+            data = readFileSync(this.filepath);
         }
 
         try {
@@ -24,8 +26,8 @@ export default class NoDBRest {
         }
     }
 
-    public get(queryObject): Object | Array<Object> | null{
-        let bufferOfSearchedObjects = [];
+    public get(queryObject: any): any | Array<any> | null{
+        let bufferOfSearchedObjects: Array<any> = [];
         this.JSONDataArray.forEach((object) => {
             let temp = this.findKeyValuePairedObjects(object, queryObject);
             if( temp !== null)
@@ -40,8 +42,8 @@ export default class NoDBRest {
             return bufferOfSearchedObjects;
     }
 
-    public update(queryObject, newValue): number{
-        let bufferOfSearchedObjects = [];
+    public update(queryObject:any, newValue:any): number{
+        let bufferOfSearchedObjects: Array<any> = [];
         this.JSONDataArray.forEach((object) => {
             let temp = this.findKeyValuePairedObjects(object, queryObject);
             if( temp !== null)
@@ -69,7 +71,7 @@ export default class NoDBRest {
     }
 
 
-    public put(queryObject): boolean{
+    public put(queryObject: any): boolean{
         let bufferOfSearchedObjects = [];
         this.JSONDataArray.push(queryObject);
         try {
@@ -81,18 +83,17 @@ export default class NoDBRest {
         return true;
     }
 
-    public delete(queryObject): number | boolean{
+    public delete(queryObject: any): number | boolean{
         let bufferOfSearchedObjects = [];
         let prevLength = this.JSONDataArray.length;
         this.JSONDataArray.forEach((object) => {
             let temp = this.findKeyValuePairedObjects(object, queryObject);
             if( temp !== null )
             this.JSONDataArray =  this.JSONDataArray.filter((object)=>{
-                return (object !== temp)
+                return object !== temp
             });
                 
         })
-
         try {
             writeFileSync(this.filepath,JSON.stringify(this.JSONDataArray))
         } catch (error) {
@@ -102,7 +103,7 @@ export default class NoDBRest {
         return prevLength - this.JSONDataArray.length;
     }
 
-    private findKeyValuePairedObjects(object,queryObject): Object{
+    private findKeyValuePairedObjects(object: any,queryObject: any): any{
         let keys = Object.keys(queryObject);
         let flag = true;
         keys.every((key)=>{

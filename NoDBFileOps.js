@@ -7,10 +7,10 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
     }
     return t;
 };
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 var fs_1 = require("fs");
-var NoDBRest = (function () {
-    function NoDBRest(filepath) {
+var NoDBFileOps = (function () {
+    function NoDBFileOps(filepath) {
         if (typeof filepath !== "undefined")
             this.filepath = filepath;
         else
@@ -20,7 +20,9 @@ var NoDBRest = (function () {
             data = fs_1.readFileSync(this.filepath);
         }
         catch (error) {
-            console.error(error);
+            fs_1.openSync(this.filepath, "w+");
+            fs_1.writeFileSync(this.filepath, "[]");
+            data = fs_1.readFileSync(this.filepath);
         }
         try {
             this.JSONDataArray = JSON.parse(data.toString());
@@ -29,7 +31,7 @@ var NoDBRest = (function () {
             console.error(error);
         }
     }
-    NoDBRest.prototype.get = function (queryObject) {
+    NoDBFileOps.prototype.get = function (queryObject) {
         var _this = this;
         var bufferOfSearchedObjects = [];
         this.JSONDataArray.forEach(function (object) {
@@ -44,7 +46,7 @@ var NoDBRest = (function () {
         else
             return bufferOfSearchedObjects;
     };
-    NoDBRest.prototype.update = function (queryObject, newValue) {
+    NoDBFileOps.prototype.update = function (queryObject, newValue) {
         var _this = this;
         var bufferOfSearchedObjects = [];
         this.JSONDataArray.forEach(function (object) {
@@ -70,7 +72,7 @@ var NoDBRest = (function () {
         }
         return bufferOfSearchedObjects.length;
     };
-    NoDBRest.prototype.put = function (queryObject) {
+    NoDBFileOps.prototype.put = function (queryObject) {
         var bufferOfSearchedObjects = [];
         this.JSONDataArray.push(queryObject);
         try {
@@ -82,7 +84,7 @@ var NoDBRest = (function () {
         }
         return true;
     };
-    NoDBRest.prototype["delete"] = function (queryObject) {
+    NoDBFileOps.prototype.delete = function (queryObject) {
         var _this = this;
         var bufferOfSearchedObjects = [];
         var prevLength = this.JSONDataArray.length;
@@ -90,7 +92,7 @@ var NoDBRest = (function () {
             var temp = _this.findKeyValuePairedObjects(object, queryObject);
             if (temp !== null)
                 _this.JSONDataArray = _this.JSONDataArray.filter(function (object) {
-                    return (object !== temp);
+                    return object !== temp;
                 });
         });
         try {
@@ -102,7 +104,7 @@ var NoDBRest = (function () {
         }
         return prevLength - this.JSONDataArray.length;
     };
-    NoDBRest.prototype.findKeyValuePairedObjects = function (object, queryObject) {
+    NoDBFileOps.prototype.findKeyValuePairedObjects = function (object, queryObject) {
         var keys = Object.keys(queryObject);
         var flag = true;
         keys.every(function (key) {
@@ -116,6 +118,6 @@ var NoDBRest = (function () {
             return null;
         }
     };
-    return NoDBRest;
+    return NoDBFileOps;
 }());
-exports["default"] = NoDBRest;
+exports.default = NoDBFileOps;

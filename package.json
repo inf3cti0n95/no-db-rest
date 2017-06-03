@@ -2,7 +2,8 @@
   "name": "no-db-rest",
   "version": "0.0.1",
   "description": "Create a REST API with Storing Data in File i.e. No DB",
-  "main": "index.js",
+  "main": "./NoDBRest.js",
+  "types": "./js/NoDBRest.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -11,7 +12,7 @@
     "url": "git+https://github.com/inf3cti0n95/no-db-rest.git"
   },
   "keywords": [
-    "REST"
+    "REST","NoDB","File As DB"
   ],
   "author": "Viraj Trivedi <inf3cti0n95@gmail.com>",
   "license": "MIT",
@@ -20,11 +21,11 @@
   },
   "homepage": "https://github.com/inf3cti0n95/no-db-rest#readme",
   "devDependencies": {
-    "@types/mkdirp": "^0.3.29",
+    "@types/express": "^4.0.35",
     "@types/node": "^7.0.23",
     "typescript": "^2.3.4"
   },
   "dependencies": {
-    "mkdirp": "^0.5.1"
+    "express": "^4.15.3"
   }
 }
