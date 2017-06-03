@@ -1,6 +1,6 @@
 {
   "name": "no-db-rest",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Create a REST API with Storing Data in File i.e. No DB",
   "main": "./NoDBRest.js",
   "types": "./js/NoDBRest.d.ts",
