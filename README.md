@@ -18,33 +18,27 @@ app.listen(3000,()=>{
 
 Here the Data will be stored in JSON form in data.json
 
-** GET ** - To reterive data from the data.json 
+### GET ### - To reterive data from the data.json 
 
 e.g. Sending a GET request to http://localhost:3000?name=naruto
 
 Searches for the Object with property name and value "naruto" and sends the the whole object as response.
 
-** PUT ** - To update data from the data.json 
-
-e.g. http://localhost:3000?search=name=naruto&update=name=sakura
-
-Searches for the Objects with property name and value "naruto", updates it with name property to "sakura" and sends the number of objects updated as response.
-
-** PUT ** - To update data from the data.json 
+### PUT ### - To update data from the data.json 
 
 e.g. SENDING a PUT request to http://localhost:3000?search=name=naruto,age=15&update=name=sakura
 
 Searches for the Objects with property name and value "naruto" and with property age with value 15, updates it with name property to "sakura" and sends the number of objects updated as response.
 
 
-** POST ** - To store data to the data.json 
+### POST ### - To store data to the data.json 
 
 e.g. Sending a POST request to http://localhost:3000?name=naruto
 
 Add a for the Object with property name and value "naruto" and sends true as response if successful.
 
 
-** DELETE ** - Deletes the object from data.json 
+### DELETE ### - Deletes the object from data.json 
 
 e.g. Sending a DELETE request to http://localhost:3000?name=naruto
 
